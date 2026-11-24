@@ -1,0 +1,327 @@
+/* =====================================================================
+   Register page
+
+   The only class names used here and in register.jsx are:
+     register-container, register-title, register-subtitle,
+     register-form, register-input, register-select,
+     register-button, login-link
+
+   Everything else (header, nav, main, labels, messages, picture preview,
+   show/hide buttons) is styled with element and attribute selectors that
+   are scoped inside .register-container / .register-form.
+   ===================================================================== */
+
+/* ---------- Page ---------- */
+
+.register-container,
+.register-container *,
+.register-container *::before,
+.register-container *::after {
+  box-sizing: border-box;
+}
+
+.register-container {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #f8fafc;
+  color: #293033;
+  font-family: Arial, sans-serif;
+  text-align: left;
+  color-scheme: light; /* keep native controls light even if the OS is in dark mode */
+}
+
+/* ---------- Header ---------- */
+
+.register-container header {
+  background: #293033;
+  color: white;
+  padding: 20px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.register-container header h2 {
+  margin: 0;
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.register-container header nav {
+  display: flex;
+  gap: 25px;
+}
+
+.register-container header a {
+  color: white;
+  text-decoration: none;
+}
+
+.register-container header a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Card ---------- */
+
+.register-container main {
+  background: white;
+  width: 90%;
+  max-width: 550px;
+  margin: 35px auto;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.register-title {
+  margin: 0 0 8px;
+  text-align: center;
+  color: #293033;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: normal;
+}
+
+.register-subtitle {
+  margin: 0 0 24px;
+  text-align: center;
+  color: #64748b;
+}
+
+/* ---------- Form layout ---------- */
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* each field = label + control + messages */
+.register-form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.register-form label {
+  font-weight: bold;
+}
+
+/* ---------- Inputs and select ---------- */
+
+.register-input,
+.register-select {
+  width: 100%;
+  padding: 14px;
+  background-color: #f3f5f7;
+  border: 1px solid #cbd5e1;
+  border-radius: 16px;
+  font-family: inherit;
+  font-size: 16px;
+  color: #293033;
+}
+
+.register-input::placeholder {
+  color: #64748b;
+}
+
+.register-input:focus-visible,
+.register-select:focus-visible {
+  outline: 2px solid #0d9488;
+  outline-offset: 1px;
+  border-color: #0d9488;
+}
+
+/* invalid field (set from register.jsx with aria-invalid) */
+.register-input[aria-invalid="true"],
+.register-select[aria-invalid="true"] {
+  border-color: #dc2626;
+  background-color: #fef2f2;
+}
+
+/* file input */
+.register-input[type="file"] {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.register-input[type="file"]::file-selector-button {
+  margin-right: 12px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #293033;
+  color: white;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* ---------- Show / hide password ---------- */
+
+/* wrapper around the password input and its Show/Hide button */
+.register-form > div > div {
+  position: relative;
+}
+
+.register-form > div > div .register-input {
+  padding-right: 76px; /* room for the button */
+}
+
+.register-form > div > div button {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+/* ---------- Text-style buttons (Show / Hide / Remove) ---------- */
+
+.register-form button[type="button"] {
+  margin: 0;
+  padding: 6px 10px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: #0f766e;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.register-form button[type="button"]:hover {
+  background: #f0fdfa;
+  text-decoration: underline;
+}
+
+.register-form button[type="button"]:focus-visible {
+  outline: 2px solid #0d9488;
+  outline-offset: 1px;
+}
+
+/* ---------- Hints and messages ---------- */
+
+.register-form small {
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* field error */
+.register-form small[role="alert"] {
+  color: #b91c1c;
+}
+
+/* form-level messages */
+.register-form p {
+  margin: 0;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.register-form p[role="alert"] {
+  color: #991b1b;
+  background: #fee2e2;
+}
+
+.register-form p[role="status"] {
+  color: #166534;
+  background: #dcfce7;
+}
+
+/* ---------- Profile picture preview ---------- */
+
+.register-form figure {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin: 6px 0 0;
+}
+
+.register-form figure img {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 2px solid #cbd5e1;
+  object-fit: cover;
+}
+
+.register-form figcaption {
+  flex: 1 1 120px;
+  font-size: 14px;
+  color: #64748b;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Create account button ---------- */
+
+.register-button {
+  margin-top: 10px;
+  padding: 14px;
+  background: #0d9488;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.register-button:hover {
+  background: #0f766e;
+}
+
+.register-button:focus-visible {
+  outline: 2px solid #293033;
+  outline-offset: 2px;
+}
+
+.register-button:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* ---------- Sign in link ---------- */
+
+.login-link {
+  margin: 20px 0 0;
+  text-align: center;
+  color: #64748b;
+}
+
+.login-link a {
+  color: #0d9488;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 600px) {
+  .register-container header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .register-container main {
+    width: 94%;
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+  .register-title {
+    font-size: 26px;
+  }
+
+  .register-form figure {
+    flex-direction: column;
+    text-align: center;
+  }
+}

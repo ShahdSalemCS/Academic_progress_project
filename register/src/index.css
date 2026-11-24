@@ -1,0 +1,17 @@
+/* Global styles only. Page styles live in register.css. */
+
+:root {
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f8fafc;
+  font-family: Arial, sans-serif;
+}
