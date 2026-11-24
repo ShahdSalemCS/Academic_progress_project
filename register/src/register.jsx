@@ -1,15 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import './register.css'; // styling for this page (file name must match exactly: register.css)
 
-/**
- * Register to create a new account.
- * Props:
- *   onRegister(userData)  async function that talks to the backend.
- *     userData = { role, fullName, universityId, department, email, password, profilePicture }
- *     - profilePicture is a File object (or null if no picture was chosen)
- *     - throw an Error inside onRegister to show its message to the user
- */
-
 /* ---------- Validation rules (change them here) ---------- */
 
 const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 2 MB
