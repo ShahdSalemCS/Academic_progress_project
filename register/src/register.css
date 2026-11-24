@@ -1,16 +1,3 @@
-/* =====================================================================
-   Register page
-
-   The only class names used here and in register.jsx are:
-     register-container, register-title, register-subtitle,
-     register-form, register-input, register-select,
-     register-button, login-link
-
-   Everything else (header, nav, main, labels, messages, picture preview,
-   show/hide buttons) is styled with element and attribute selectors that
-   are scoped inside .register-container / .register-form.
-   ===================================================================== */
-
 /* ---------- Page ---------- */
 
 .register-container,
