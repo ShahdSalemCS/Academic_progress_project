@@ -17,7 +17,7 @@ const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png']; // JPG / PNG
 const MIN_PASSWORD_LENGTH = 8;
 
 const NAME_PATTERN = /^[\p{L}\p{M}][\p{L}\p{M}\s'.-]*$/u; // letters, spaces, ' . -
-const UNIVERSITY_ID_PATTERN = /^[A-Za-z0-9-]{4,15}$/; // adjust to your university's ID format
+const UNIVERSITY_ID_PATTERN = /^\d{8}$/; // adjust to your university's ID format
 const DEPARTMENT_PATTERN = /^[\p{L}\p{M}][\p{L}\p{M}\s&,'.()-]*$/u;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -68,9 +68,9 @@ function validateField(name, values) {
       const text = value.trim();
       const label = values.role === 'student' ? 'student ID' : 'university ID';
       if (!text) return `Enter your ${label}.`;
-      if (!UNIVERSITY_ID_PATTERN.test(text)) {
-        return 'Use 4 to 15 characters: letters, numbers, or hyphens only.';
-      }
+     if (!UNIVERSITY_ID_PATTERN.test(text)) {
+  return 'University ID must contain exactly 8 digits.';
+}
       return '';
     }
 
@@ -232,9 +232,12 @@ function Register({ onRegister = logRegistration }) {
 
   /* ----- text fields ----- */
 
-  const handleChange = (event) => {
+    const handleChange = (event) => {
     const { name, value } = event.target;
-    const nextData = { ...formData, [name]: value };
+  const nextValue = name === 'universityId'
+    ? value.replace(/\D/g, '').slice(0, 8)
+    : value;
+  const nextData = { ...formData, [name]: nextValue };
 
     setFormData(nextData);
     setStatus(NO_STATUS);
@@ -369,15 +372,16 @@ function Register({ onRegister = logRegistration }) {
 
           <div>
             <label htmlFor="universityId">{idLabel}</label>
-            <input
-              className="register-input"
-              type="text"
-              placeholder={`Enter your ${idLabel.toLowerCase()}`}
-              autoComplete="off"
-              maxLength={15}
-              required
-              {...fieldProps('universityId')}
-            />
+           <input
+            className="register-input"
+            type="text"
+            inputMode="numeric"
+            placeholder="Enter 8-digit University ID"
+            autoComplete="off"
+            maxLength={8}
+            required
+            {...fieldProps('universityId')}
+          />
             <FieldError id="universityId-error" message={errors.universityId} />
           </div>
 
